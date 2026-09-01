@@ -1,0 +1,23 @@
+#container {
+  display: flex;
+}
+
+#numbers {
+  width: 160px;;
+}
+
+#operators {
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  width: 50px;
+  height: 50px;
+}
+
+#display {
+  border: 1px solid black;
+  height: 25px;
+  width: 250px;
+}
