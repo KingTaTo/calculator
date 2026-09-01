@@ -8,9 +8,6 @@ let resetDisplay = true;
 let numberGrid = document.querySelector("#numbers");
 let display = document.querySelector("#display");
 
-
-display.textContent = 0;
-
 // Number grid creation + logic
 for (let i = 9; i >= 0; i--) {
   let numberButton = utils.makeButton(i);
@@ -48,16 +45,25 @@ numberGrid.append(clearBtn);
 
 
 // Operator buttons
-let addBtn = utils.makeButton("+");
-addBtn.addEventListener("click", event => {
-  currentOperation = utils.add;
-  // If there isn't an answer, then set answer, otherwise treat is as num2
-  if (!answer) {
-    answer = Number(display.textContent);
-    resetDisplay = true;
-    equalLastPressed = false;
-    return;
-  }
+let operatorColumn = document.querySelector("#operators");
+const operations = new Map([
+  [utils.add, '+'],
+  [utils.subtract, '-'],
+  [utils.multiply, '*'],
+  [utils.divide, '/']
+]);
+
+operations.forEach(function(value, key) {
+  let operationBtn = utils.makeButton(value);
+  operationBtn.addEventListener("click", event => {
+    currentOperation = key;
+    // If there isn't an answer, then set answer, otherwise treat it as num2
+    if (!answer) {
+      answer = Number(display.textContent);
+      resetDisplay = true;
+      equalLastPressed = false;
+      return;
+    }
   // Update num2 if resetDisplay is false to cover scenario of repeatedly pressing 
   // the operation
   if (!resetDisplay && !equalLastPressed) {
@@ -67,22 +73,7 @@ addBtn.addEventListener("click", event => {
   }
   resetDisplay = true;
   equalLastPressed = false;
+
+  });
+  operatorColumn.appendChild(operationBtn);
 });
-
-
-let subtractBtn = utils.makeButton("-");
-let multiplyBtn = utils.makeButton("*");
-let divideBtn = utils.makeButton("/");
-
-let operatorColumn = document.querySelector("#operators");
-operatorColumn.appendChild(addBtn);
-operatorColumn.appendChild(subtractBtn);
-operatorColumn.appendChild(multiplyBtn);
-operatorColumn.appendChild(divideBtn);
-
-
-
-
-
-
-// console.log(operator(add, 4, 2));
