@@ -43,8 +43,7 @@ clearBtn.addEventListener("click", event => {
 });
 numberGrid.append(clearBtn);
 
-
-// Operator buttons
+// Operator buttons + logic
 let operatorColumn = document.querySelector("#operators");
 const operations = new Map([
   [utils.add, '+'],
